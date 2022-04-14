@@ -8,3 +8,4 @@ An application for a user to store their lists and keep theor life organized.
 
 * -[4/12/2022]: built out file structure
 * -[4/12/2022]: added routes
+* -[4/13/2022]: database connected
