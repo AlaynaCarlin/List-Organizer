@@ -1,8 +1,14 @@
 const Express = require("express"); // require the use of express npm package that we installed
 const app = Express(); // we create an express app
+const bodyParser = require('body-parser')
 const dbConnection = require ('./db');
-
 const controllers = require("./controllers");
+const middleware = require('./middleware/headers');
+
+app.use(bodyParser.json())
+
+
+app.use(Express.json());
 
 app.use('/list', controllers.listController);
 app.use('/item', controllers.itemController);
