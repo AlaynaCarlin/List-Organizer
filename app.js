@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Express = require("express"); // require the use of express npm package that we installed
 const app = Express(); // we create an express app
 const bodyParser = require('body-parser')
