@@ -12,4 +12,4 @@ An application for a user to store their lists and keep theor life organized.
 * -[4/18/2022]: models complete
 * -[4/29/2022]: Fixed endpoint, register complete
 * -[4/30/2022]: login endpoint works, worked on usercontroller
-* -[5/2/2022]: added tokenization and password incryption, usercontroller finished
+* -[5/2/2022]: added tokenization and password incryption, usercontroller finished, & listcontroller started
