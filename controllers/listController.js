@@ -10,12 +10,12 @@ router.get('/pretend', validateJWT, (req, res) => {
 // * Create a List
 router.post('/create', validateJWT, async (req, res) => {
     const {title, date, complete} = req.body.list;
-    const {id} = req.user;
+    const {id} = req.user.id;
     const listEntry = {
         title,
         date,
         complete,
-        owner: id
+        userId: id
     }
     try {
         const newList = await models.ListModel.create(listEntry);
