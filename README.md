@@ -15,3 +15,4 @@ An application for a user to store their lists and keep theor life organized.
 * -[5/2/2022]: added tokenization and password incryption, usercontroller finished, & listcontroller started
 * -[5/3/2022]: worked on listcontroller endpoints. error w/ list model
 * -[5/4/2022]: fixed bug, (May the Fourth be with you)
+* -[5/5/2022]: worked on listController, update not working
