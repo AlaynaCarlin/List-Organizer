@@ -119,14 +119,23 @@ router.get('/', async (req, res) => {
 
 // 12.3.4 blue
 
-// * Get a list by id
+// * Get a list and items by id
 router.get('/:id', validateJWT, async (req, res) => {
     const { id } = req.params;
     try {
-        const results = await models.ListModel.findAll({
+        const results = await models.ListModel.findOne({
             where: { id: id }
+        })
+
+        const items = await models.ItemModel.findAll({
+            where: {
+                listId: id
+            }
+        })
+        res.status(200).json({
+            list: results,
+            items: items
         });
-        res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
     }
