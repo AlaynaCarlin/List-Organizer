@@ -65,6 +65,47 @@ router.put('/update/:id', validateJWT, async (req, res) => {
 });
 
 // * Delete a List
+router.delete('/delete/:id', validateJWT, async (req, res) => {
+    const listId = req.params.id;
+    const { id } = req.user;
+
+    if (req.user.admin) {
+        const query = {
+            where: {
+                id: listId
+            }
+        };
+
+        try {
+            const deleteList = await models.ListModel.destroy(query);
+            res.status(200).json({
+                message: `${deleteList} list Deleted`,
+                query: query
+            });
+        } catch (err) {
+            res.status(500).json({ error: err });
+            message = 'error deleting'
+        }
+    } else {
+        const query = {
+            where: {
+                id: listId,
+                userId: id
+            }
+        };
+
+        try {
+            const deleteList = await models.ListModel.destroy(query);
+            res.status(200).json({
+                message: `${deleteList} list deleted`,
+                query: query
+            });
+        } catch (err) {
+            res.status(500).json({ error: err });
+            message = 'error deleting'
+        }
+    }
+});
 
 // * Get all Lists
 router.get('/', async (req, res) => {
