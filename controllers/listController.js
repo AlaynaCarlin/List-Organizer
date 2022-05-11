@@ -33,15 +33,15 @@ router.post('/create', validateJWT, async (req, res) => {
 });
 
 // * Update a List
-router.put('/update/:entryId', validateJWT, async (req, res) => {
+router.put('/update/:id', validateJWT, async (req, res) => {
     const { title, date, complete } = req.body.list;
-    const listId = req.params.entryId;
-    const {id} = req.user;
+    const listId = req.params.id;
+    const userId = req.user.id;
 
     const query = {
         where: {
             id: listId,
-            userId: id
+            userId: userId
         }
     };
 
@@ -50,6 +50,7 @@ router.put('/update/:entryId', validateJWT, async (req, res) => {
         date: date,
         complete: complete
     };
+    console.log(updateList);
 
     try {
         const update = await models.ListModel.update(updateList, query);
