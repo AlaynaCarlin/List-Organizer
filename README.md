@@ -19,4 +19,4 @@ An application for a user to store their lists and keep theor life organized.
 * -[5/7/2022]: fixed update
 * -[5/9/2022]: psych, update is still broken
 * -[5/10/2022]: debuging update
-* -[5/11/2022]: update actually works now? ListController complete
+* -[5/11/2022]: update actually works now? ListController complete, started itemController
