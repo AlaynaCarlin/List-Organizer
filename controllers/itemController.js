@@ -31,7 +31,7 @@ router.post('/create', validateJWT, async (req, res) => {
 
 // * update item
 router.put('/update/:id', validateJWT, async (req, res) => {
-    const{ content } = req.body.item;
+    const { content } = req.body.item;
     const itemId = req.params.id;
     const { id } = req.user;
 
@@ -60,6 +60,47 @@ router.put('/update/:id', validateJWT, async (req, res) => {
 })
 
 // * delete item
+router.delete('/delete/:id', validateJWT, async (req, res) => {
+    const itemId = req.params.id;
+    const { id } = req.user;
+
+    if (req.user.admin) {
+        const query = {
+            where: {
+                id: itemId
+            }
+        }
+
+        try {
+            const deleteItem = await models.ItemModel.destroy(query);
+            res.status(200).json({
+                message: `${deleteItem} item deleted`,
+                query: query
+            });
+        } catch (err) {
+            res.status(500).json({ error: err });
+            message = `error deleting ${err}`
+        }
+    } else {
+        const query = {
+            where: {
+                id: itemId,
+                userId: id
+            }
+        }
+
+        try {
+            const deleteItem = await models.ItemModel.destroy(query);
+            res.status(200).json({
+                message: `${deleteItem} item deleted`,
+                query: query
+            });
+        } catch (err) {
+            res.status(500).json({ verror: err });
+            message = 'error deleting'
+        }
+    }
+});
 
 
 module.exports = router;
