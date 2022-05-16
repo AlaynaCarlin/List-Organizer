@@ -29,9 +29,37 @@ router.post('/create', validateJWT, async (req, res) => {
     };
 });
 
-// * update comment
+// * update item
+router.put('/update/:id', validateJWT, async (req, res) => {
+    const{ content } = req.body.item;
+    const itemId = req.params.id;
+    const { id } = req.user;
 
-// * delete comment
+    const query = {
+        where: {
+            id: itemId,
+            userId: id
+        }
+    };
+
+    const updatedItem = {
+        content: content
+    };
+
+    try {
+        const update = await models.ItemModel.update(updatedItem, query);
+        res.status(200).json({
+            message: `${update} Item updated`,
+            update: updatedItem,
+            query: query
+        });
+    } catch (err) {
+        res.status(500).json({ error: err });
+        message = 'error updating item'
+    }
+})
+
+// * delete item
 
 
 module.exports = router;
